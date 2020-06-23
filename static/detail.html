@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客详情</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+
+    <!--导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu aligned">
+                <h2 class="ui header teal item">Blog</h2>
+                <a href="javascript:;" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="javascript:;" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="javascript:;" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a href="javascript:;" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+                <a href="javascript:;" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                <div class="right m-item item m-mobile-hide">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" placeholder="Search">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle icon black button m-right-top m-mobile-show ">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--中间内容-->
+    <div class="m-container-small m-padded-tb-big">
+        <div class="ui container">
+            <div class="ui top attached segment">
+                <div class="ui horizontal link list">
+                    <div class="item">
+                        <img src="https://pic.cnblogs.com/avatar/777904/20150624230221.png" alt=""
+                            class="ui avatar image">
+                        <div class="content"><a href="javascript:;" class="header">Jerry</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="calendar icon"></i> 2020-4-23
+                    </div>
+                    <div class="item">
+                        <i class="eye icon"></i> 666
+                    </div>
+                </div>
+            </div>
+            <div class="ui attached segment">
+                <!-- 图片区 -->
+                <img src="https://pic.cnblogs.com/avatar/777904/20150624230221.png" alt=""
+                    class="ui fluid rounded image">
+            </div>
+            <div class="ui attached padded segment">
+                <!-- 内容 -->
+                <div class="ui right aligned basic segment">
+                    <div class="ui orange basic label">原创</div>
+                </div>
+                <h2 class="ui center aligned header">
+                    mybatis-spring
+                </h2>
+                <br>
+                <div id="content" class="m-padded-lr-responsive m-padded-tb-large">
+
+                    <div class="section">
+                        <h2><a name="a.E5.85.A5.E9.97.A8"></a>入门</h2>
+
+                        <p>
+                            本章将会以简略的步骤告诉你如何安装和配置 MyBatis-Spring，并构建一个简单的具备事务管理功能的数据访问应用程序。
+                        </p>
+
+
+                        <div class="section">
+                            <h3><a name="a.E5.AE.89.E8.A3.85"></a>安装</h3>
+
+                            <p>
+                                要使用 MyBatis-Spring 模块，只需要在类路径下包含 <tt>mybatis-spring-2.0.5.jar</tt> 文件和相关依赖即可。
+                            </p>
+
+                            <p>
+                                如果使用 Maven 作为构建工具，仅需要在 pom.xml 中加入以下代码即可：
+                            </p>
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="tag">&lt;dependency&gt;</span><span class="pln">
+                      </span><span class="tag">&lt;groupId&gt;</span><span class="pln">org.mybatis</span><span class="tag">&lt;/groupId&gt;</span><span class="pln">
+                      </span><span class="tag">&lt;artifactId&gt;</span><span class="pln">mybatis-spring</span><span class="tag">&lt;/artifactId&gt;</span><span class="pln">
+                      </span><span class="tag">&lt;version&gt;</span><span class="pln">2.0.5</span><span class="tag">&lt;/version&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;/dependency&gt;</span></pre>
+                            </div>
+                        </div>
+
+
+                        <div class="section">
+                            <h3><a name="a.E5.BF.AB.E9.80.9F.E4.B8.8A.E6.89.8B"></a>快速上手</h3>
+
+                            <p>
+                                要和 Spring 一起使用 MyBatis，需要在 Spring 应用上下文中定义至少两样东西：一个 <tt>SqlSessionFactory</tt>
+                                和至少一个数据映射器类。
+                            </p>
+
+
+                            <p>
+                                在 MyBatis-Spring 中，可使用 <tt>SqlSessionFactoryBean</tt>来创建 <tt>SqlSessionFactory</tt>。
+                                要配置这个工厂 bean，只需要把下面代码放在 Spring 的 XML 配置文件中：
+                            </p>
+
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="tag">&lt;bean</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"sqlSessionFactory"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"org.mybatis.spring.SqlSessionFactoryBean"</span><span class="tag">&gt;</span><span class="pln">
+                      </span><span class="tag">&lt;property</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"dataSource"</span><span class="pln"> </span><span class="atn">ref</span><span class="pun">=</span><span class="atv">"dataSource"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;/bean&gt;</span></pre>
+                            </div>
+
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="lit">@Bean</span><span class="pln">
+                    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">SqlSessionFactory</span><span class="pln"> sqlSessionFactory</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">Exception</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                      </span><span class="typ">SqlSessionFactoryBean</span><span class="pln"> factoryBean </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">SqlSessionFactoryBean</span><span class="pun">();</span><span class="pln">
+                      factoryBean</span><span class="pun">.</span><span class="pln">setDataSource</span><span class="pun">(</span><span class="pln">dataSource</span><span class="pun">());</span><span class="pln">
+                      </span><span class="kwd">return</span><span class="pln"> factoryBean</span><span class="pun">.</span><span class="pln">getObject</span><span class="pun">();</span><span class="pln">
+                    </span><span class="pun">}</span></pre>
+                            </div>
+
+
+                            <p>
+                                注意：<tt>SqlSessionFactory</tt> 需要一个 <tt>DataSource</tt>（数据源）。
+                                这可以是任意的 <tt>DataSource</tt>，只需要和配置其它 Spring 数据库连接一样配置它就可以了。
+                            </p>
+
+
+                            <p>
+                                假设你定义了一个如下的 mapper 接口：
+                            </p>
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">interface</span><span class="pln"> </span><span class="typ">UserMapper</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                      </span><span class="lit">@Select</span><span class="pun">(</span><span class="str">"SELECT * FROM users WHERE id = #{userId}"</span><span class="pun">)</span><span class="pln">
+                      </span><span class="typ">User</span><span class="pln"> getUser</span><span class="pun">(</span><span class="lit">@Param</span><span class="pun">(</span><span class="str">"userId"</span><span class="pun">)</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> userId</span><span class="pun">);</span><span class="pln">
+                    </span><span class="pun">}</span><span class="pln"> </span></pre>
+                            </div>
+
+
+                            <p>
+                                那么可以通过 <tt>MapperFactoryBean</tt> 将接口加入到 Spring 中:
+                            </p>
+
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="tag">&lt;bean</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"userMapper"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"org.mybatis.spring.mapper.MapperFactoryBean"</span><span class="tag">&gt;</span><span class="pln">
+                      </span><span class="tag">&lt;property</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"mapperInterface"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"org.mybatis.spring.sample.mapper.UserMapper"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+                      </span><span class="tag">&lt;property</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"sqlSessionFactory"</span><span class="pln"> </span><span class="atn">ref</span><span class="pun">=</span><span class="atv">"sqlSessionFactory"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+                    </span><span class="tag">&lt;/bean&gt;</span></pre>
+                            </div>
+
+
+                            <p>
+                                需要注意的是：所指定的映射器类<b>必须</b>是一个接口，而不是具体的实现类。在这个示例中，通过注解来指定 SQL 语句，但是也可以使用 MyBatis 映射器的 XML
+                                配置文件。
+                            </p>
+
+
+                            <p>
+                                配置好之后，你就可以像 Spring 中普通的 bean 注入方法那样，将映射器注入到你的业务或服务对象中。<tt>MapperFactoryBean</tt> 将会负责
+                                <tt>SqlSession</tt> 的创建和关闭。如果使用了 Spring 的事务功能，那么当事务完成时，session 将会被提交或回滚。最终任何异常都会被转换成
+                                Spring 的 <tt>DataAccessException</tt> 异常。
+                            </p>
+
+
+                            <p>
+                                使用 Java 代码来配置的方式如下：
+                            </p>
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="lit">@Bean</span><span class="pln">
+                    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">UserMapper</span><span class="pln"> userMapper</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">Exception</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                      </span><span class="typ">SqlSessionTemplate</span><span class="pln"> sqlSessionTemplate </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">SqlSessionTemplate</span><span class="pun">(</span><span class="pln">sqlSessionFactory</span><span class="pun">());</span><span class="pln">
+                      </span><span class="kwd">return</span><span class="pln"> sqlSessionTemplate</span><span class="pun">.</span><span class="pln">getMapper</span><span class="pun">(</span><span class="typ">UserMapper</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">
+                    </span><span class="pun">}</span></pre>
+                            </div>
+
+
+                            <p>
+                                要调用 MyBatis 的数据方法，只需一行代码：
+                            </p>
+
+                            <div class="source">
+                                <pre class="prettyprint"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">FooServiceImpl</span><span class="pln"> </span><span class="kwd">implements</span><span class="pln"> </span><span class="typ">FooService</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                    
+                      </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">UserMapper</span><span class="pln"> userMapper</span><span class="pun">;</span><span class="pln">
+                    
+                      </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">FooServiceImpl</span><span class="pun">(</span><span class="typ">UserMapper</span><span class="pln"> userMapper</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">userMapper </span><span class="pun">=</span><span class="pln"> userMapper</span><span class="pun">;</span><span class="pln">
+                      </span><span class="pun">}</span><span class="pln">
+                    
+                      </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">User</span><span class="pln"> doSomeBusinessStuff</span><span class="pun">(</span><span class="typ">String</span><span class="pln"> userId</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                        </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">userMapper</span><span class="pun">.</span><span class="pln">getUser</span><span class="pun">(</span><span class="pln">userId</span><span class="pun">);</span><span class="pln">
+                      </span><span class="pun">}</span><span class="pln">
+                    </span><span class="pun">}</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--标签-->
+                <div class="m-padded-lr-responsive">
+                    <div class="ui basic teal left pointing label">
+                        mybatis-spring
+                    </div>
+                </div>
+
+                <!--赞赏-->
+                <div class="ui center aligned basic segment">
+                    <button id="btnPay" class="ui orange basic circular button">赞赏</button>
+                </div>
+                <div class="ui payQR flowing popup transition hidden">
+                    <div class="ui orange basic label">
+                        <div class="ui images" style="font-size: inherit;">
+                            <div class="image">
+                                <img src="images/go.png" alt="" class="ui rounded bordered image" style="width: 120px;">
+                                <div>支付宝</div>
+                            </div>
+                            <div class="image">
+                                <img src="images/go.png" alt="" class="ui rounded bordered image" style="width: 120px;">
+                                <div>微信</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="ui attached positive message">
+                <!-- 博客信息 -->
+                <div class="ui middle aligned grid">
+                    <div class="eleven wide column">
+                        <ul class="list">
+                            <li>作者：Jerry(联系作者)</li>
+                            <li>发表时间：2020-6-22 09:08</li>
+                            <li>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）</li>
+                            <li>公众号转载：请在文末添加作者公众号二维码</li>
+                        </ul>
+                    </div>
+                    <div class="five wide column">
+                        <img src="images/go.png" alt="" class="ui right floated rounded bordered image"
+                            style="width: 110px;">
+                    </div>
+                </div>
+            </div>
+            <div class="ui bottom attached segment">
+                <!-- 留言区 -->
+                <div class="ui teal segment">
+                    <div class="ui comments">
+                        <h3 class="ui dividing header">Comments</h3>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="images/go.png">
+                            </a>
+                            <div class="content">
+                                <a class="author">Matt</a>
+                                <div class="metadata">
+                                    <span class="date">Today at 5:42PM</span>
+                                </div>
+                                <div class="text">
+                                    How artistic!
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="images/go.png">
+                            </a>
+                            <div class="content">
+                                <a class="author">Elliot Fu</a>
+                                <div class="metadata">
+                                    <span class="date">Yesterday at 12:30AM</span>
+                                </div>
+                                <div class="text">
+                                    <p>This has been very useful for my research. Thanks as well!</p>
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                            <div class="comments">
+                                <div class="comment">
+                                    <a class="avatar">
+                                        <img src="images/go.png">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">Jenny Hess</a>
+                                        <div class="metadata">
+                                            <span class="date">Just now</span>
+                                        </div>
+                                        <div class="text">
+                                            Elliot you are always so right :)
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="images/go.png">
+                            </a>
+                            <div class="content">
+                                <a class="author">Joe Henderson</a>
+                                <div class="metadata">
+                                    <span class="date">5 days ago</span>
+                                </div>
+                                <div class="text">
+                                    Dude, this is awesome. Thanks so much
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ui form">
+                    <div class="field">
+                        <textarea name="content" placeholder="请输入评论信息。。。"></textarea>
+                    </div>
+                    <div class="fields">
+                        <div class="field m-mobile-wide m-margin-bottom-small">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" placeholder="姓名" name="nickname">
+                            </div>
+
+                        </div>
+                        <div class="field m-mobile-wide m-margin-bottom-small">
+                            <div class="ui left icon input">
+                                <i class="mail icon"></i>
+                                <input type="text" placeholder="邮箱" name="email">
+                            </div>
+                        </div>
+                        <div class="field m-mobile-wide m-margin-bottom-small">
+                            <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <!--底部footer-->
+    <footer class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="images/go.png" alt="go" class="ui rounded image" style="height: 100px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="javascript:;" class="item">用户故事</a>
+                        <a href="javascript:;" class="item">我要高飞</a>
+                        <a href="javascript:;" class="item">到天空的顶点</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="javascript:;" class="item">QQ:506670809</a>
+                        <a href="javascript:;" class="item">Email:lhj8023gyl@163.com</a>
+
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced m-opacity-mini">LirenMe</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">
+                        我有一些故事,觉得让它们在时间里老去有点不妥，于是我把它们分别折进一首歌里，在百无聊赖的下午，与你分享。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-mini">© Jerry 2020</p>
+        </div>
+    </footer>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <script>
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+
+        $('#btnPay').popup({
+            popup: $('.payQR.popup'),
+            on: 'click',
+            position: 'bottom center'
+        });
+    </script>
+
+</body>
+
+</html>
